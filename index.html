@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Mikely</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <style>
@@ -17,137 +17,81 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--cor-fundo);
-            font-family: 'Lora', serif;
-            overflow: hidden;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; background-color: var(--cor-fundo);
+            font-family: 'Lora', serif; overflow: hidden;
+            touch-action: manipulation;
         }
 
         #aviso-topo {
-            position: fixed;
-            top: 15px;
-            text-align: center;
-            color: var(--cor-detalhe);
-            font-weight: bold;
-            z-index: 100;
-            background: rgba(255,255,255,0.9);
-            padding: 8px 15px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            font-size: 14px;
+            position: fixed; top: 10px; text-align: center;
+            color: var(--cor-detalhe); font-weight: bold; z-index: 100;
+            background: rgba(255,255,255,0.9); padding: 8px 12px;
+            border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-size: 13px; width: 80%; max-width: 300px;
         }
 
         .girassol-fundo {
-            position: absolute;
-            font-size: 2.2rem;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.4s ease;
-            filter: grayscale(1) opacity(0.2);
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: absolute; font-size: 2rem; cursor: pointer;
+            user-select: none; transition: all 0.4s ease;
+            filter: grayscale(1) opacity(0.2); z-index: 1;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .girassol-fundo.aceso {
             filter: grayscale(0) opacity(1) drop-shadow(0 0 10px rgba(255, 223, 0, 0.8));
-            transform: scale(1.1);
+            transform: scale(1.1); z-index: 2;
         }
 
         .palavra-pop {
-            font-size: 11px;
-            color: white;
-            background: var(--cor-detalhe);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
-            opacity: 0;
-            transition: 0.3s;
-            padding: 4px 8px;
-            border-radius: 5px;
-            margin-bottom: 8px;
-            white-space: nowrap;
+            font-size: 10px; color: white; background: var(--cor-detalhe);
+            font-family: 'Montserrat', sans-serif; font-weight: bold;
+            opacity: 0; transition: 0.3s; padding: 3px 7px;
+            border-radius: 5px; margin-bottom: 5px; white-space: nowrap;
         }
 
         .girassol-fundo.aceso .palavra-pop { opacity: 1; }
 
-        .container {
-            position: relative;
-            z-index: 5;
-            perspective: 1000px;
-            margin-top: 50px;
-        }
+        .container { position: relative; z-index: 10; perspective: 1000px; }
 
         .envelope-wrapper {
-            position: relative;
-            width: 480px;
-            height: 300px;
+            position: relative; width: 320px; height: 210px;
             background-color: var(--cor-envelope);
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         .carta {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 94%;
-            height: 90%;
-            background: var(--cor-papel);
-            padding: 35px;
-            box-sizing: border-box;
-            transition: all 1s ease-in-out;
-            z-index: 2;
-            overflow-y: auto;
+            position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+            width: 94%; height: 90%; background: var(--cor-papel);
+            padding: 25px; box-sizing: border-box; transition: all 1s ease-in-out;
+            z-index: 2; overflow-y: auto;
         }
 
-        .destinatario { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--cor-detalhe); margin-bottom: 15px; display: block; }
-        .texto-carta { font-size: 0.95rem; line-height: 1.7; color: #333; text-align: justify; }
+        .destinatario { font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--cor-detalhe); margin-bottom: 10px; display: block; }
+        .texto-carta { font-size: 0.9rem; line-height: 1.6; color: #333; text-align: justify; }
 
         .envelope-wrapper::before {
-            content: "";
-            position: absolute;
-            z-index: 4;
-            border-top: 150px solid transparent;
-            border-right: 240px solid var(--cor-envelope);
-            border-bottom: 150px solid var(--cor-envelope);
-            border-left: 240px solid var(--cor-envelope);
+            content: ""; position: absolute; z-index: 4;
+            border-top: 105px solid transparent; border-right: 160px solid var(--cor-envelope);
+            border-bottom: 105px solid var(--cor-envelope); border-left: 160px solid var(--cor-envelope);
         }
 
         .aba {
-            position: absolute;
-            top: 0; width: 0; height: 0;
-            border-top: 150px solid var(--cor-envelope-interna);
-            border-left: 240px solid transparent;
-            border-right: 240px solid transparent;
-            transform-origin: top;
-            transition: all 0.6s ease-in-out;
-            z-index: 5;
+            position: absolute; top: 0; width: 0; height: 0;
+            border-top: 105px solid var(--cor-envelope-interna);
+            border-left: 160px solid transparent; border-right: 160px solid transparent;
+            transform-origin: top; transition: all 0.6s ease-in-out; z-index: 5;
         }
 
         .selo {
-            position: absolute;
-            top: 125px; left: 50%; transform: translateX(-50%);
-            width: 55px; height: 55px;
-            background: var(--cor-detalhe);
-            border-radius: 50%;
-            z-index: 6;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px;
-            transition: 0.5s;
+            position: absolute; top: 85px; left: 50%; transform: translateX(-50%);
+            width: 50px; height: 50px; background: var(--cor-detalhe);
+            border-radius: 50%; z-index: 6; display: flex;
+            align-items: center; justify-content: center; font-size: 22px; transition: 0.5s;
         }
 
-        .selo.liberado {
-            background: var(--ouro);
-            box-shadow: 0 0 20px var(--ouro);
-            animation: pulse 1.5s infinite;
-        }
+        .selo.liberado { background: var(--ouro); box-shadow: 0 0 20px var(--ouro); animation: pulse 1.5s infinite; }
 
         @keyframes pulse {
             0% { transform: translateX(-50%) scale(1); }
@@ -156,88 +100,70 @@
         }
 
         .container.aberto .aba { transform: rotateX(180deg); z-index: 1; }
-        .container.aberto .carta { height: 480px; transform: translate(-50%, -200px); z-index: 10; box-shadow: 0 5px 25px rgba(0,0,0,0.15); }
+        .container.aberto .carta { height: 420px; transform: translate(-50%, -180px); z-index: 20; box-shadow: 0 5px 25px rgba(0,0,0,0.15); }
         .container.aberto .selo { opacity: 0; }
 
-        .assinatura { text-align: right; margin-top: 35px; font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--cor-detalhe); }
+        .assinatura { text-align: right; margin-top: 25px; font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: var(--cor-detalhe); }
 
-        @media (max-width: 600px) {
-            .envelope-wrapper { width: 300px; height: 200px; }
-            .envelope-wrapper::before { border-width: 100px 150px; }
-            .aba { border-width: 100px 150px; }
-            .container.aberto .carta { height: 400px; transform: translate(-50%, -170px); }
+        @media (min-width: 601px) {
+            .envelope-wrapper { width: 480px; height: 300px; }
+            .envelope-wrapper::before { border-width: 150px 240px; }
+            .aba { border-width: 150px 240px; }
+            .container.aberto .carta { height: 480px; transform: translate(-50%, -200px); }
+            .selo { top: 125px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="aviso-topo">Ilumine os 10 girassóis para abrir a carta da sua irmã (<span id="count">0</span>/10)</div>
+    <div id="aviso-topo">Ilumine os 10 girassóis para abrir o cadeado (<span id="count">0</span>/10)</div>
 
-    <div class="girassol-fundo" style="top: 12%; left: 8%;" onclick="acender(this)"><span class="palavra-pop">Amor</span>🌻</div>
-    <div class="girassol-fundo" style="top: 18%; right: 10%;" onclick="acender(this)"><span class="palavra-pop">Maternidade</span>🌻</div>
-    <div class="girassol-fundo" style="bottom: 12%; left: 10%;" onclick="acender(this)"><span class="palavra-pop">Força</span>🌻</div>
-    <div class="girassol-fundo" style="bottom: 18%; right: 12%;" onclick="acender(this)"><span class="palavra-pop">Luz</span>🌻</div>
-    <div class="girassol-fundo" style="top: 45%; left: 5%;" onclick="acender(this)"><span class="palavra-pop">Coragem</span>🌻</div>
-    <div class="girassol-fundo" style="top: 45%; right: 5%;" onclick="acender(this)"><span class="palavra-pop">Cuidado</span>🌻</div>
-    <div class="girassol-fundo" style="bottom: 35%; left: 22%;" onclick="acender(this)"><span class="palavra-pop">Orgulho</span>🌻</div>
-    <div class="girassol-fundo" style="top: 5%; left: 45%;" onclick="acender(this)"><span class="palavra-pop">Transformação</span>🌻</div>
-    <div class="girassol-fundo" style="bottom: 5%; right: 45%;" onclick="acender(this)"><span class="palavra-pop">Gratidão</span>🌻</div>
-    <div class="girassol-fundo" style="top: 75%; left: 45%;" onclick="acender(this)"><span class="palavra-pop">Família</span>🌻</div>
+    <div class="girassol-fundo" style="top: 10%; left: 10%;" onclick="acender(this)"><span class="palavra-pop">Amor</span>🌻</div>
+    <div class="girassol-fundo" style="top: 10%; right: 10%;" onclick="acender(this)"><span class="palavra-pop">Luz</span>🌻</div>
+    <div class="girassol-fundo" style="top: 25%; left: 5%;" onclick="acender(this)"><span class="palavra-pop">Maternidade</span>🌻</div>
+    <div class="girassol-fundo" style="top: 25%; right: 5%;" onclick="acender(this)"><span class="palavra-pop">Força</span>🌻</div>
+    <div class="girassol-fundo" style="bottom: 10%; left: 10%;" onclick="acender(this)"><span class="palavra-pop">Gratidão</span>🌻</div>
+    <div class="girassol-fundo" style="bottom: 10%; right: 10%;" onclick="acender(this)"><span class="palavra-pop">Família</span>🌻</div>
+    <div class="girassol-fundo" style="bottom: 25%; left: 5%;" onclick="acender(this)"><span class="palavra-pop">Orgulho</span>🌻</div>
+    <div class="girassol-fundo" style="bottom: 25%; right: 5%;" onclick="acender(this)"><span class="palavra-pop">Transformação</span>🌻</div>
+    <div class="girassol-fundo" style="top: 50%; left: 2%;" onclick="acender(this)"><span class="palavra-pop">Coragem</span>🌻</div>
+    <div class="girassol-fundo" style="top: 50%; right: 2%;" onclick="acender(this)"><span class="palavra-pop">Cuidado</span>🌻</div>
 
     <div class="container" id="envelopeContainer" onclick="tentarAbrir()">
         <div class="envelope-wrapper">
             <div class="aba"></div>
             <div class="selo" id="seloCadeado">🔒</div>
-            
             <div class="carta">
                 <span class="destinatario">Para Minha Irmã Mikely,</span>
-                
                 <div class="texto-carta">
                     <p>Este ano te transformou de um jeito profundo. Tornar-se mãe não foi apenas ganhar um novo papel, foi abrir espaço no coração para um amor que reorganiza tudo. Você mudou, cresceu e se fortaleceu, mesmo nos dias em que se sentiu cansada ou insegura.</p>
-
                     <p>Ver você nessa nova fase é perceber o quanto o cuidado já fazia parte de quem você é. Agora ele ganhou um nome, um rosto e um sentido ainda maior. Entre noites curtas, aprendizados constantes e um amor que não se explica, você segue fazendo o melhor que pode, e isso é mais do que suficiente.</p>
-
                     <p>Quero que você saiba que não precisa ser perfeita. Ser presente, humana e amorosa já é imenso. E, mesmo sendo mãe agora, você continua sendo você, com sua história, sua sensibilidade e sua luz.</p>
-
                     <p>Saiba que você nunca caminha sozinha. Tenho muito orgulho da mulher e da mãe que você está se tornando. E sou grato por dividir a vida com alguém tão especial quanto você.</p>
-                    
                     <p>Com todo meu carinho.</p>
                 </div>
-
-                <div class="assinatura">
-                    Do seu Irmão,<br>
-                    <strong>Wellison</strong>
-                </div>
+                <div class="assinatura">Do seu Irmão,<br><strong>Wellison</strong></div>
             </div>
         </div>
     </div>
 
     <script>
-        let girassoisAcesos = 0;
-        const totalGirassois = 10;
-
+        let girassoisAcesos = 0; const totalGirassois = 10;
         function acender(elemento) {
             if (!elemento.classList.contains('aceso')) {
-                elemento.classList.add('aceso');
-                girassoisAcesos++;
+                elemento.classList.add('aceso'); girassoisAcesos++;
                 document.getElementById('count').innerText = girassoisAcesos;
-                
                 if (girassoisAcesos === totalGirassois) {
                     const selo = document.getElementById('seloCadeado');
-                    selo.innerText = "🔓";
-                    selo.classList.add('liberado');
-                    document.getElementById('aviso-topo').innerText = "Cadeado aberto! Clique no envelope. ✨";
+                    selo.innerText = "🔓"; selo.classList.add('liberado');
+                    document.getElementById('aviso-topo').innerText = "Cadeado aberto! Toque no envelope.";
                 }
             }
             event.stopPropagation();
         }
-
         function tentarAbrir() {
-            if (girassoisAcesos < totalGirassois) {
-                alert("Ilumine todos os girassóis para abrir a carta!");
-            } else {
-                document.getElementById('envelopeContainer').classList.toggle('aberto');
-            }
+            if (girassoisAcesos < totalGirassois) alert("Ilumine os 10 girassóis primeiro!");
+            else document.getElementById('envelopeContainer').classList.toggle('aberto');
         }
     </script>
 </body>
